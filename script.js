@@ -1,14 +1,22 @@
 document.querySelector('.Btn').addEventListener('click', generatePassword);
 
 function generatePassword() {
-  const length = document.getElementById('length').value;
+  const minLength = 6; // Minimum password length
+  const maxLength = 25; // Maximum password length
+  const length = parseInt(document.getElementById('length').value);
+
+
+  
+  // Adjust length within the specified range
+  const passwordLength = Math.min(Math.max(length, minLength), maxLength);
+
   const uppercase = document.getElementById('uppercase').checked;
   const lowercase = document.getElementById('lowercase').checked;
   const numbers = document.getElementById('numbers').checked;
   const special = document.getElementById('special').checked;
 
   const charset = generateCharset(uppercase, lowercase, numbers, special);
-  const password = generateRandomPassword(length, charset);
+  const password = generateRandomPassword(passwordLength, charset);
 
   document.querySelector('.password1').value = password;
 }
